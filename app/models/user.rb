@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
   	return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
+  def user_params
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation)
+  end
+
 end
